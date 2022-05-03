@@ -1,49 +1,29 @@
+class Juego {
+    constructor (nombre, precio, consola) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.consola = consola;
+    }
+}
+
+const juego1 = new Juego ("Horizon Forbidden West", 2600, "Play Station 5");
+const juego2 = new Juego ("Halo Infinite", 3000, "Xbox Series X");
+
 let entrada = parseFloat(prompt("Seleccione una de las siguientes opciones: \n1) Agregar Horizzon forbidden west al carrito \n2) Agregar Halo Infinite al carrito \n3) Vaciar carrito \n4) Consultar carrito \n5) Finalizar compra"));
-let carrito = 0
-
-function agregarHorizon() {
-    carrito += 2600;
-    alert("Horizon forbidden west fue agregado correctamente al carrito");
-}
-
-function agregarHalo() {
-    carrito += 3000;
-    alert("Halo Infinite fue agregado correctamente al carrito");
-}
+let carrito = []
 
 function vaciarCarrito() {
-    carrito = 0;
+    carrito.splice(0, carrito.length);
     alert("El carrito fue vaciado correctamente");
-}
-
-function consultarCarrito() {
-    switch (carrito) {
-        case 0:
-            alert("El carrito esta vacio");
-            break;
-        case 2600:
-            alert(`Horizon forbidden west se encuentra en el carrito, el valor del carrito es de $${carrito}`);
-            break;
-        case 3000:
-            alert(`Halo Infinite se encuentra en el carrito, el valor del carrito es de $${carrito}`);
-            break;
-        case 5600:
-            alert(`Horizon forbidden west y Halo Infinite se encuentran en el carrito, el valor del carrito es de $${carrito}`);
-            break;
-        default:
-            alert(`Ocurrio un error con el carrito, solo puede agregar una copia de cada juego`);
-            vaciarCarrito()
-            break;
-    }
 }
 
 while (entrada != 5) {
     switch (entrada) {
         case 1:
-            agregarHorizon();
+            carrito.push(juego1);
             break;
         case 2:
-            agregarHalo();
+            carrito.push(juego2);
             break;
         case 3:
             vaciarCarrito();
@@ -58,8 +38,33 @@ while (entrada != 5) {
     entrada = parseFloat(prompt("Seleccione una de las siguientes opciones: \n1) Agregar Horizzon forbidden west al carrito \n2) Agregar Halo Infinite al carrito \n3) Vaciar carrito \n4) Consultar carrito \n5) Finalizar compra"));
 }
 
-if (carrito == 0){
+function consultarCarrito() {
+    let valorCarrito = carrito.reduce( (accum, elem) => accum + elem.precio, 0);
+    switch (valorCarrito) {
+        case 0:
+            alert("El carrito esta vacio");
+            break;
+        case 2600:
+            alert(`Horizon forbidden west se encuentra en el carrito, el valor del carrito es de $${valorCarrito}`);
+            break;
+        case 3000:
+            alert(`Halo Infinite se encuentra en el carrito, el valor del carrito es de $${valorCarrito}`);
+            break;
+        case 5600:
+            alert(`Horizon forbidden west y Halo Infinite se encuentran en el carrito, el valor del carrito es de $${valorCarrito}`);
+            break;
+        default:
+            alert(`Ocurrio un error con el carrito, solo puede agregar una copia de cada juego`);
+            vaciarCarrito()
+            break;
+    }
+}
+
+if (carrito.length == 0){
     alert("Gracias por visitar nuestra página, esperemos que la próxima vez adquiera alguna copia de nuestros videojuegos.")
+} else if (carrito.length > 2) {
+    alert("Solo puede agregar una copia de cada juego, intentelo nuevamente");
+    vaciarCarrito();
 } else {
-    alert(`Su compra finalizo con exito, el valor final de la compra fue de $${carrito}, gracias por visitar nuestra página.`);
+    alert("Gracias por comprar en nuestra tienda");
 }
