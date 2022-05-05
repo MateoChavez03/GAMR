@@ -4,38 +4,68 @@ class Juego {
         this.precio = precio;
         this.consola = consola;
     }
+    
+    agregar() {
+        carrito.push(this);
+    }
+
+    quitar() {
+        let pos = carrito.indexOf(this);
+        carrito.splice(pos, 1);
+    }
 }
 
-const juego1 = new Juego ("Horizon Forbidden West", 2600, "Play Station 5");
-const juego2 = new Juego ("Halo Infinite", 3000, "Xbox Series X");
+const horizon = new Juego ("horizon forbidden west", 2600, "Play Station 5");
+const halo = new Juego ("halo infinite", 3000, "Xbox Series X");
 
-let entrada = parseFloat(prompt("Seleccione una de las siguientes opciones: \n1) Agregar Horizzon forbidden west al carrito \n2) Agregar Halo Infinite al carrito \n3) Vaciar carrito \n4) Consultar carrito \n5) Finalizar compra"));
+const juegos = [horizon, halo];
+let entrada = parseInt(prompt("Seleccione una de las siguientes opciones: \n1) Buscar juego\n2) Vaciar carrito \n3) Consultar carrito \n4) Finalizar compra"));
 let carrito = []
 
 function vaciarCarrito() {
-    carrito.splice(0, carrito.length);
+    carrito = [];
     alert("El carrito fue vaciado correctamente");
 }
 
-while (entrada != 5) {
+while (entrada != 4) {
     switch (entrada) {
         case 1:
-            carrito.push(juego1);
+            let busqueda = prompt("Ingrese el nombre del juego");
+            buscar(busqueda);
             break;
         case 2:
-            carrito.push(juego2);
-            break;
-        case 3:
             vaciarCarrito();
             break;
-        case 4:
+        case 3:
             consultarCarrito();
             break;
         default:
             alert("El número ingresado es incorrecto, por favor ingrese un número entre 1 y 5")
             break;
     }
-    entrada = parseFloat(prompt("Seleccione una de las siguientes opciones: \n1) Agregar Horizzon forbidden west al carrito \n2) Agregar Halo Infinite al carrito \n3) Vaciar carrito \n4) Consultar carrito \n5) Finalizar compra"));
+    entrada = parseFloat(prompt("Seleccione una de las siguientes opciones: \n1) Buscar juego\n2) Vaciar carrito \n3) Consultar carrito \n4) Finalizar compra"));
+}
+
+function buscar(busqueda) {
+    let juegoEncontrado = juegos.find( (elem) => elem.nombre === busqueda.toLowerCase() );
+    if (juegoEncontrado != undefined) {
+        let opcion = parseInt(prompt(`Nombre del juego: ${juegoEncontrado.nombre} \nPrecio: ${juegoEncontrado.precio} \n1) Agregar al carrito \n2) Quitar del carrito \n3) Volver`));
+        switch (opcion) {
+            case 1:
+                juegoEncontrado.agregar()
+                break;
+            case 2:
+                juegoEncontrado.quitar();
+                break;
+            case 3:
+                break;
+            default:
+                alert("Por favor seleccione una opción valida");
+                break;
+        }
+    } else {
+        alert("No existe ningún juego con ese nombre");
+    }
 }
 
 function consultarCarrito() {
