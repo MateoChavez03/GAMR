@@ -1,157 +1,118 @@
-window.addEventListener("load", async() => {
-await new Promise((resolve) => {setTimeout(() => {
-    resolve();
-}, 100);});
-
-// Creación de los objetos juegos, con su correspondiente almacenamiento en un array
+// Estableciendo los objetos de venta
 
 class Juego {
-    constructor (nombre, precio, consola) {
+    constructor (id, nombre, precio, consola, imagen) {
+        this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.consola = consola;
-    }
-    
-    agregar() {
-        carrito.push(this);
-    }
-
-    quitar() {
-        let pos = carrito.indexOf(this);
-        carrito.splice(pos, 1);
+        this.imagen = imagen
     }
 }
 
-const horizon = new Juego ("horizon forbidden west", 2600, "Play Station 5");
-const halo = new Juego ("halo infinite", 3000, "Xbox Series X");
+const horizon = new Juego (1, "Horizon Forbidden West", 2600, "Play Station", `https://as01.epimg.net/meristation/imagenes/2021/05/15/noticias/1621083825_707762_1621084771_portada_normal.jpg`);
+const halo = new Juego (2, "Halo Infinite", 3000, "Xbox Series", `https://i.blogs.es/c031b9/halo-infinite-portada/450_1000.jpeg`);
+const hogwarts = new Juego (3, "Hogwarts Legacy", 2000, "Xbox Series", `https://as01.epimg.net/meristation/imagenes/2021/01/13/noticias/1610559449_696528_1610559646_portada_normal.jpg`);
+const uncharted = new Juego (4, "Uncharted 4", 1500, "Play Station", `https://areajugones.sport.es/wp-content/uploads/2015/03/Uncharted-42.jpg`);
+const last = new Juego (5, "The Last of Us 2", 4000, "Play Station", `https://as01.epimg.net/meristation/imagenes/2020/06/11/analisis/1591883470_004485_1591942609_noticia_normal.jpg`);
+const gears = new Juego (6, "Gears 5", 2100, "Xbox Series", `https://www.muycomputer.com/wp-content/uploads/2019/08/Gears-5-1.jpg`);
 
-const juegos = [horizon, halo];
+const juegos = [horizon, halo, hogwarts, uncharted, last, gears];
 
-// Primer interacción del usuario
+// Algoritmo que añade productos al main y al modal
 
-let entrada = prompt("Seleccione una de las siguientes opciones: \n1) Buscar juego\n2) Vaciar carrito \n3) Consultar carrito \n4) Finalizar compra");
+const productos = document.getElementById("main");
+const tabla = document.getElementById("tablaCarrito");
+
 let carrito = [];
 
-// Lógica de elección de opciones
+// Función para agregar card dinamicamente
 
-while (entrada != 4) {
-    switch (entrada) {
-        case "1":
-            let busqueda = prompt("Ingrese el nombre del juego");
-            buscar(busqueda);
-            break;
-        case "2":
-            vaciarCarrito();
-            break;
-        case "3":
-            consultarCarrito();
-            break;
-        default:
-            alert("El número ingresado es incorrecto, por favor ingrese un número entre 1 y 5")
-            break;
+function agregarCard(item) {
+    return (
+        `
+        <div class="card m-5 bg-black text-light border-light" style="width: 25rem;">
+            <img src="${item.imagen}" class="card-img-top pt-2" alt="portada">
+            <div class="card-body">
+                <h5 class="card-title">${item.nombre}</h5>
+                <p class="card-text">Info</p>
+            </div>
+                <ul class="list-group list-group-flush border-light">
+                    <li class="list-group-item bg-black text-light border-light">Precio: $${item.precio}</li>
+                    <li class="list-group-item bg-black text-light border-light">Consola: ${item.consola}</li>
+                </ul>
+            <div class="card-body">
+                <button onclick=agregarCarrito(${item.id}) type="button" class="btn btn-light agregar">AGREGAR AL CARRITO</button>
+            </div>
+        </div>
+        `
+    )
+}
+
+// Función para agregar tabla dinamicamente
+
+function agregarTabla(item) {
+    return(
+        `
+        <tr>
+            <th scope="row">${item.id}</th>
+            <td>${item.nombre}</td>
+            <td>$${item.precio}</td>
+            <td>${item.consola}</td>
+            <td>
+                <button type="button" class="btn btn-dark btn-sm">QUITAR</button>
+            </td>
+        </tr>
+        `
+    )
+}
+
+// Función de carga de productos, tanto al main como al modal
+
+let totalCarrito = document.getElementById("total");
+
+const cargarProductos = (datos, nodo, esTabla) => {
+    let acumulador = "";
+    datos.forEach((el) => {
+        acumulador += esTabla ? agregarTabla(el) : agregarCard(el);
+    })
+    nodo.innerHTML = acumulador;
+};
+
+const agregarCarrito = (id) => {
+    const seleccion = juegos.find(item => item.id === id);
+    const busqueda = carrito.findIndex(el => el.id === id);
+    
+    if (busqueda === -1) {
+        carrito.push(seleccion)
     }
-    entrada = prompt("Seleccione una de las siguientes opciones: \n1) Buscar juego\n2) Vaciar carrito \n3) Consultar carrito \n4) Finalizar compra");
+    
+    let valorCarrito = carrito.reduce( (accum, elem) => accum + elem.precio, 0);
+    totalCarrito.innerText = `Precio total: $${valorCarrito}`;
+
+    cargarProductos(carrito, tabla, true);
 }
 
-if (carrito.length == 0){
-    alert("Gracias por visitar nuestra página, esperemos que la próxima vez adquiera alguna copia de nuestros videojuegos.")
-} else if (carrito.length > 2) {
-    alert("Solo puede agregar una copia de cada juego, intentelo nuevamente");
-    vaciarCarrito();
-} else {
-    alert("Gracias por comprar en nuestra tienda");
-}
+cargarProductos(juegos, main, false);
 
-
-// Creación de funciones
-// Función de busqueda de juegos (correspondiente al primer caso en "switch")
-
-function buscar(busqueda) {
-    let juegoEncontrado = juegos.find( (elem) => elem.nombre === busqueda.toLowerCase() );
-    if (juegoEncontrado != undefined) {
-        let opcion = prompt(`Nombre del juego: ${juegoEncontrado.nombre} \nPrecio: ${juegoEncontrado.precio} \n1) Agregar al carrito \n2) Quitar del carrito \n3) Volver`);
-        switch (opcion) {
-            case "1":
-                juegoEncontrado.agregar()
-                break;
-            case "2":
-                juegoEncontrado.quitar();
-                break;
-            case "3":
-                break;
-            default:
-                alert("Por favor seleccione una opción valida");
-                break;
-        }
-    } else {
-        alert("No existe ningún juego con ese nombre");
-    }
-}
-
-// Función para vaciar carrito (correspondiente al segundo caso en "switch")
+// Acción para vaciar carrito desde el modal
 
 function vaciarCarrito() {
     carrito = [];
-    alert("El carrito fue vaciado correctamente");
+    tabla.innerHTML = "";
+    totalCarrito.innerText = "Precio total: $0";
 }
 
-// Función para consultar el valor del carrito (correspondiente al tercer caso en "switch")
+let vaciar = document.querySelector(".vaciar");
 
-function consultarCarrito() {
-    let valorCarrito = carrito.reduce( (accum, elem) => accum + elem.precio, 0);
-    switch (valorCarrito) {
-        case 0:
-            alert("El carrito esta vacio");
-            break;
-        case 2600:
-            alert(`Horizon forbidden west se encuentra en el carrito, el valor del carrito es de $${valorCarrito}`);
-            break;
-        case 3000:
-            alert(`Halo Infinite se encuentra en el carrito, el valor del carrito es de $${valorCarrito}`);
-            break;
-        case 5600:
-            alert(`Horizon forbidden west y Halo Infinite se encuentran en el carrito, el valor del carrito es de $${valorCarrito}`);
-            break;
-        default:
-            alert(`Ocurrio un error con el carrito, solo puede agregar una copia de cada juego`);
-            vaciarCarrito()
-            break;
-    }
+vaciar.onclick = () => {
+    vaciarCarrito();
+} 
+
+// Acción para finalizar compra
+
+let finalizar = document.querySelector(".finalizar");
+
+finalizar.onclick = () => {
+    vaciarCarrito();
 }
-
-// Modificando HTML de forma dinámica
-
-function haloVendido() {
-    let juego1 = document.getElementsByClassName(`juego1_compra`);
-    for (const juego of juego1) {
-        juego.innerHTML = `<h2>COMPRADO</h2>`
-    }
-}
-
-function horizonVendido() {
-    let juego2 = document.getElementsByClassName(`juego2_compra`);
-    for (const juego of juego2) {
-        juego.innerHTML = `<h2>COMPRADO</h2>`
-    }
-}
-
-let principal = document.getElementById("footer");
-let parrafo = `<h3>Ha comprado todos los juegos de nuestra página</h3>`;
-
-function todoVendido() {
-    let final = document.createElement("p");
-    final.innerHTML = parrafo; 
-    principal.append(final);
-}
-
-if (carrito.indexOf(horizon) >= 0) {
-    horizonVendido();
-}
-if (carrito.indexOf(halo) >= 0) {
-    haloVendido();
-}
-
-if ((carrito.indexOf(halo) >= 0) && (carrito.indexOf(horizon) >= 0)) {
-    todoVendido();
-}
-});
