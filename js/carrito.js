@@ -6,9 +6,7 @@ const agregarCarrito = (id) => {
     const seleccion = juegos.find(item => item.id === id);
     const busqueda = carrito.findIndex(el => el.id === id);
     
-    if (busqueda === -1) {
-        carrito.push(seleccion)
-    }
+    busqueda === -1 && carrito.push(seleccion);
     
     calculoTotal();
     enCarrito(id);
@@ -42,7 +40,7 @@ function vaciarCarrito() {
     carrito = [];
     tabla.innerHTML = "";
     calculoTotal();
-    cargarProductos(juegos, main, false)
+    cargarProductos(juegos, main, false);
 }
 
 // Acción para vaciar carrito desde el modal

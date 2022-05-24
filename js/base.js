@@ -12,7 +12,6 @@ function agregarCard(item) {
             <img src="${item.imagen}" class="card-img-top pt-2" alt="portada">
             <div class="card-body">
                 <h5 class="card-title">${item.nombre}</h5>
-                <p class="card-text">Info</p>
             </div>
                 <ul class="list-group list-group-flush border-light">
                     <li class="list-group-item bg-black text-light border-light">Precio: $${item.precio}</li>
