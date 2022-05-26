@@ -8,6 +8,7 @@ const agregarCarrito = (id) => {
     
     busqueda === -1 && carrito.push(seleccion);
     
+    agregadoAlCarrito(seleccion.nombre);
     calculoTotal();
     enCarrito(id);
     cargarProductos(carrito, tabla, true);
@@ -22,6 +23,28 @@ function enCarrito(id) {
         botonModal = document.querySelector(`.game${id}`);
         botonModal.innerHTML = `<button type="button" class="btn btn-light" disabled>EN CARRITO</button>`;
     })
+}
+
+// Función que realiza una alerta al cargar un producto al carrito
+
+function agregadoAlCarrito(nombre) {
+    Swal.fire({
+        position: 'bottom',
+        width: '32rem',
+        title: `${nombre} fue agregado correctamente al carrito`,
+        showConfirmButton: false,
+        timer: 1500,
+        showClass: {
+            popup: 'animate__animated animate__fadeInUp'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutDown'
+          },
+        customClass: {
+            title: 'm-0',
+            title: 'fs-6',
+        }
+      });
 }
 
 // Función que calcula y modifica el valor total del carrito
@@ -47,12 +70,67 @@ function vaciarCarrito() {
 
 let vaciar = document.querySelector(".vaciar");
 vaciar.onclick = () => {
-    vaciarCarrito();
+    Swal.fire({
+        title: '¿Esta seguro que desea vaciar el carrito?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#000000',
+        cancelButtonColor: '33,37,41',
+        cancelButtonText: 'Volver',
+        confirmButtonText: 'Confirmar',
+        customClass:{
+            title: 'text-dark'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            position: 'top',
+            title: 'Vacio!',
+            text: 'El carrito fue vaciado con éxito',
+            showConfirmButton: false,
+            timer: 1500,
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+            customClass:{
+                title: 'text-dark'
+            }
+          });
+          vaciarCarrito();
+        }
+      })
 } 
 
 // Acción para finalizar compra desde el modal
 
 let finalizar = document.querySelector(".finalizar");
 finalizar.onclick = () => {
-    vaciarCarrito();
+    Swal.fire({
+        title: '¿Esta seguro que desea finalizar la compra?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#000000',
+        cancelButtonColor: '33,37,41',
+        cancelButtonText: 'Volver',
+        confirmButtonText: 'Finalizar',
+        customClass:{
+            title: 'text-dark'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Gracias!',
+            text: 'La compra ha finalizado con éxito',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass:{
+                title: 'text-dark'
+            }
+          });
+          vaciarCarrito();
+        }
+      })
 }
