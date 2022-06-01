@@ -1,0 +1,14 @@
+[
+    {"id": 1, "nombre": "Horizon Forbidden West", "precio": 2600, "consola": "Play Station 5", "imagen": "https://as01.epimg.net/meristation/imagenes/2021/05/15/noticias/1621083825_707762_1621084771_portada_normal.jpg"},
+    {"id": 2, "nombre": "Halo Infinite", "precio": 3000, "consola": "Xbox Series", "imagen": "https://i.blogs.es/c031b9/halo-infinite-portada/450_1000.jpeg"},
+    {"id": 3, "nombre": "Hogwarts Legacy", "precio": 2000, "consola": "Xbox Series", "imagen": "https://as01.epimg.net/meristation/imagenes/2021/01/13/noticias/1610559449_696528_1610559646_portada_normal.jpg"},
+    {"id": 4, "nombre": "Uncharted 4", "precio": 1500, "consola": "Play Station 5", "imagen": "https://areajugones.sport.es/wp-content/uploads/2015/03/Uncharted-42.jpg"},
+    {"id": 5, "nombre": "The Last of Us 2", "precio": 4000, "consola": "Play Station 5", "imagen": "https://as01.epimg.net/meristation/imagenes/2020/06/11/analisis/1591883470_004485_1591942609_noticia_normal.jpg"},
+    {"id": 6, "nombre": "Gears 5", "precio": 2100, "consola": "Xbox Series", "imagen": "https://www.muycomputer.com/wp-content/uploads/2019/08/Gears-5-1.jpg"},
+    {"id": 7, "nombre": "God of War", "precio": 4000, "consola": "Play Station 5", "imagen": "https://hardzone.es/app/uploads-hardzone.es/2022/03/God-Of-War-PC-Portada.jpg"},
+    {"id": 8, "nombre": "Unravel 2", "precio": 2100, "consola": "Xbox Series", "imagen": "https://i.ytimg.com/vi/9H76s1MaMK4/maxresdefault.jpg"},
+    {"id": 9, "nombre": "Spider-Man: Miles Morales", "precio": 2600, "consola": "Play Station 5", "imagen": "https://i.ytimg.com/vi/Q3kfF3XNzw8/maxresdefault.jpg"},
+    {"id": 10, "nombre": "Ratchet & Clank: Rift Apart", "precio": 4000, "consola": "Play Station 5", "imagen": "https://as01.epimg.net/meristation/imagenes/2021/02/11/header_image/933090091613061458.jpg"},
+    {"id": 11, "nombre": "State of Decay 2", "precio": 2000, "consola": "Xbox Series", "imagen": "https://as01.epimg.net/meristation/imagenes/2018/04/06/noticia/1522988280_498561_1531816355_sumario_normal.jpg"},
+    {"id": 12, "nombre": "Sea of Thieves", "precio": 3000, "consola": "Xbox Series", "imagen": "https://www.zonammorpg.com/wp-content/uploads/2018/01/3b9907bf-92ef-46e4-9a02-ecbd453252cc.jpg"}
+]

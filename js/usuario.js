@@ -1,7 +1,3 @@
-// Algoritmo para crear y guardar usuarios utilizando local storage
-
-const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
 // Accion para guardar usuario
 
 let crearUsuario = document.querySelector("#crearUsuario");
@@ -14,18 +10,14 @@ crearUsuario.onclick = () => {
 
 let usuario = {};
 
-function guardarUsuario() {
+const guardarUsuario = () => {
     let nombreUsuario = document.querySelector(".nombreUsuario").value;
     let mailUsuario = document.querySelector(".mailUsuario").value;
     let contraseñaUsuario = document.querySelector(".contraseñaUsuario").value;
     usuario = {nombre: nombreUsuario, mail: mailUsuario, contraseña: contraseñaUsuario};
 
     usuarios.push(usuario);
-    guardarUsuarioLocal("usuarios", JSON.stringify(usuarios));
-}
-
-function guardarUsuarioLocal(clave, valor) {
-    localStorage.setItem(clave, valor);
+    guardarEnLocal("usuarios", JSON.stringify(usuarios));
 }
 
 // Modificacion dinamica de offcanvas al crear usuario
@@ -33,7 +25,7 @@ function guardarUsuarioLocal(clave, valor) {
 let tituloOffcanvas = document.querySelector(".tituloOffcanvas");
 let bodyOffcanvas = document.querySelector(".bodyOffcanvas");
 
-function cambiarOffcanvas() {
+const cambiarOffcanvas = () => {
     const {nombre} = usuario;
     tituloOffcanvas.innerText = "Sesión Iniciada";
     bodyOffcanvas.innerHTML = `

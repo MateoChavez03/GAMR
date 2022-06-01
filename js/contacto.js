@@ -1,6 +1,6 @@
 let offcanvasContacto = document.querySelector(".offcanvasIzquierdo");
 
-function establecerContacto() {
+const establecerContacto = () => {
     const {nombre, mail, telefono, logoFacebook, logoTwitter, logoInstagram} = infoContacto
     offcanvasContacto.innerHTML = `
     <div>

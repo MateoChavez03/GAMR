@@ -1,5 +1,3 @@
-let carrito = [];
-
 // Funcion para cargar productos al carrito
 
 const agregarCarrito = (id) => {
@@ -11,14 +9,17 @@ const agregarCarrito = (id) => {
     agregadoAlCarrito(seleccion.nombre);
     calculoTotal();
     enCarrito(id);
+    guardarEnLocal("carrito", JSON.stringify(carrito));
     cargarProductos(carrito, tabla, true);
 }
+
+cargarProductos(carrito, tabla, true);
 
 // Función para cambiar estilo de boton cuando agregas al carrito
 
 let botonModal = "";
 
-function enCarrito(id) {
+const enCarrito = (id) => {
     juegos.forEach(() => {
         botonModal = document.querySelector(`.game${id}`);
         botonModal.innerHTML = `<button type="button" class="btn btn-light" disabled>EN CARRITO</button>`;
@@ -27,7 +28,7 @@ function enCarrito(id) {
 
 // Función que realiza una alerta al cargar un producto al carrito
 
-function agregadoAlCarrito(nombre) {
+const agregadoAlCarrito = (nombre) => {
     Swal.fire({
         position: 'bottom',
         width: '32rem',
@@ -52,15 +53,18 @@ function agregadoAlCarrito(nombre) {
 let totalCarrito = document.querySelector("#total");
 let valorCarrito = carrito.reduce( (accum, elem) => accum + elem.precio, 0);
 
-function calculoTotal() {
+const calculoTotal = () => {
     valorCarrito = carrito.reduce( (accum, elem) => accum + elem.precio, 0);
     totalCarrito.innerText = `Precio total: $${valorCarrito}`;
 }
 
+calculoTotal();
+
 // Funcion para vaciar carrito desde el modal
 
-function vaciarCarrito() {
+const vaciarCarrito = () => {
     carrito = [];
+    localStorage.removeItem("carrito");
     tabla.innerHTML = "";
     calculoTotal();
     cargarProductos(juegos, main, false);
@@ -70,7 +74,8 @@ function vaciarCarrito() {
 
 let vaciar = document.querySelector(".vaciar");
 vaciar.onclick = () => {
-    Swal.fire({
+    if (carrito.length > 0) {
+      Swal.fire({
         title: '¿Esta seguro que desea vaciar el carrito?',
         icon: 'warning',
         showCancelButton: true,
@@ -102,35 +107,62 @@ vaciar.onclick = () => {
           vaciarCarrito();
         }
       })
+    } else {
+      Swal.fire({
+        title: 'El carrito ya se encuentra vacio',
+        icon: 'warning',
+        showCancelButton: false,
+        showConfirmButton: false,
+        timer: 2000,
+        customClass:{
+            title: 'text-dark'
+        }
+      })
+    }
 } 
 
 // Acción para finalizar compra desde el modal
 
 let finalizar = document.querySelector(".finalizar");
 finalizar.onclick = () => {
+  if (carrito.length > 0) {
     Swal.fire({
-        title: '¿Esta seguro que desea finalizar la compra?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#000000',
-        cancelButtonColor: '33,37,41',
-        cancelButtonText: 'Volver',
-        confirmButtonText: 'Finalizar',
-        customClass:{
-            title: 'text-dark'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Gracias!',
-            text: 'La compra ha finalizado con éxito',
-            showConfirmButton: false,
-            timer: 3000,
-            customClass:{
-                title: 'text-dark'
-            }
-          });
-          vaciarCarrito();
-        }
-      })
+      title: '¿Esta seguro que desea finalizar la compra?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#000000',
+      cancelButtonColor: '33,37,41',
+      cancelButtonText: 'Volver',
+      confirmButtonText: 'Finalizar',
+      customClass:{
+          title: 'text-dark'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Gracias!',
+          text: 'La compra ha finalizado con éxito',
+          showConfirmButton: false,
+          timer: 3500,
+          customClass:{
+              title: 'text-dark'
+          }
+        });
+        vaciarCarrito();
+      }
+    })
+  } else {
+    Swal.fire({
+      title: 'El carrito se encuentra vacio',
+      text: 'No es posible continuar con la compra, agregue algún juego al carrito',
+      icon: 'warning',
+      showCancelButton: false,
+      showConfirmButton: false,
+      timer: 3000,
+      customClass:{
+          title: 'text-dark',
+          text: 'text-dark'
+      }
+    })
+  }
 }

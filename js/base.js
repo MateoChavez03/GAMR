@@ -5,7 +5,7 @@ const tabla = document.querySelector("#tablaCarrito");
 
 // Función para agregar cards dinamicamente
 
-function agregarCard(item) {
+const agregarCard = (item) => {
     return (
         `
         <div class="card m-5 bg-black text-light border-light" style="width: 25rem;">
@@ -27,7 +27,7 @@ function agregarCard(item) {
 
 // Función para agregar tabla dinamicamente
 
-function agregarTabla(item) {
+const agregarTabla = (item) => {
     return(
         `
         <tr>
@@ -45,7 +45,7 @@ function agregarTabla(item) {
 
 // Función de carga de productos, tanto al main como al modal
 
-const cargarProductos = (datos, nodo, esTabla) => {
+const cargarProductos = async (datos, nodo, esTabla) => {
     let acumulador = "";
     datos.forEach((el) => {
         acumulador += esTabla ? agregarTabla(el) : agregarCard(el);
@@ -53,4 +53,8 @@ const cargarProductos = (datos, nodo, esTabla) => {
     nodo.innerHTML = acumulador;
 };
 
-cargarProductos(juegos, main, false);
+// Funcion para guardar objetos en local storage
+
+const guardarEnLocal = (clave, valor) => {
+    localStorage.setItem(clave, valor);
+}
