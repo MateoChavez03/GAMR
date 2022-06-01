@@ -37,5 +37,4 @@ const cambiarOffcanvas = () => {
     <div class="d-grid gap-2">
         <button class="btn btn-light" id="cerrarSesion" onclick=location.reload() type="button">Cerrar Sesión</button>
     </div>`;
-    
 }
