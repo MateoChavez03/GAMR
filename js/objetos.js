@@ -32,3 +32,6 @@ const traerJuegos = async () => {
 }
 
 traerJuegos();
+
+
+// afhnwauihrfnjwa
