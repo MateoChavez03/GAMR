@@ -1,5 +1,7 @@
 let offcanvasContacto = document.querySelector(".offcanvasIzquierdo");
 
+// Función para establecer contacto dinámicamente
+
 const establecerContacto = () => {
     const {nombre, mail, telefono} = infoContacto
     offcanvasContacto.innerHTML = `

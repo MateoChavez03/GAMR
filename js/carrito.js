@@ -1,6 +1,6 @@
 let botonModal;
 
-// Funcion para cargar productos al carrito
+// Función para cargar productos al carrito
 
 const agregarCarrito = (id) => {
     const seleccion = juegos.find(item => item.id === id);
@@ -53,7 +53,7 @@ const calculoTotal = () => {
 
 calculoTotal();
 
-// Funcion para quitar un elemento del carrito
+// Función para quitar un elemento del carrito
 
 const quitarCarrito = (id) => {
     const seleccion = juegos.find(item => item.id === id);
@@ -88,7 +88,7 @@ const quitarCarrito = (id) => {
 }
 
 
-// Funcion para vaciar carrito desde el modal
+// Función para vaciar carrito desde el modal
 
 const vaciarCarrito = () => {
     carrito = [];
@@ -195,7 +195,7 @@ finalizar.onclick = () => {
   }
 }
 
-// Funcion para comprobar el contenido del carrito
+// Función para comprobar el contenido del carrito
 
 const comprobarCarrito = () => {
 

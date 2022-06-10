@@ -1,7 +1,7 @@
 const productos = document.querySelector("#main");
 const tabla = document.querySelector("#tablaCarrito");
 
-// Función para agregar cards dinamicamente
+// Función para agregar cards dinámicamente
 
 const agregarCard = (item) => {
     return (
@@ -23,7 +23,7 @@ const agregarCard = (item) => {
     )
 }
 
-// Función para agregar tabla dinamicamente
+// Función para agregar tabla dinámicamente
 
 const agregarTabla = (item) => {
     return(
@@ -57,7 +57,7 @@ const guardarEnLocal = (clave, valor) => {
     localStorage.setItem(clave, valor);
 }
 
-// Función para mostrar juegos de Play Station 5
+// Función para mostrar juegos filtrados por consola
 
 const filtroPorConsola = (consola) => {
     let juegosFiltrados = juegos.filter(juego => juego.consola === consola);

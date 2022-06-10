@@ -1,7 +1,7 @@
 let tituloOffcanvas = document.querySelector(".tituloOffcanvas");
 let bodyOffcanvas = document.querySelector(".bodyOffcanvas");
 
-// Accion del boton crear usuario
+// Acción del boton crear usuario
 
 let crearUsuario = document.querySelector("#crearUsuario");
 crearUsuario.onclick = () => {
@@ -61,7 +61,7 @@ const guardarUsuario = () => {
     }
 }
 
-// Modificación dinamica de offcanvas al crear usuario o iniciar sesion
+// Modificación dinámica de offcanvas al crear usuario o iniciar sesión
 
 const cambiarOffcanvas = (user) => {
     let {nombre} = user;
@@ -77,7 +77,7 @@ const cambiarOffcanvas = (user) => {
     </div>`;
 }
 
-// Función de inicio de sesion
+// Función de inicio de sesión
 
 const iniciarSesion = () => {
     let nombreUsuario = document.querySelector(".nombreUsuario").value;
@@ -103,7 +103,7 @@ const iniciarSesion = () => {
     }
 }
 
-// Accion para iniciar sesion
+// Acción para iniciar sesión
 
 let inicioSesion = document.querySelector("#iniciarSesion");
 inicioSesion.onclick = () => {
