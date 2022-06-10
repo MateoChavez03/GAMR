@@ -1,14 +1,14 @@
 [
-    {"id": 1, "nombre": "Horizon Forbidden West", "precio": 2600, "consola": "Play Station 5", "imagen": "assets/img/horizon_portada.jpg"},
-    {"id": 2, "nombre": "Halo Infinite", "precio": 3000, "consola": "Xbox Series", "imagen": "assets/img/halo_portada.jpg"},
-    {"id": 3, "nombre": "Hogwarts Legacy", "precio": 2000, "consola": "Xbox Series", "imagen": "assets/img/hogwarts_portada.jpg"},
-    {"id": 4, "nombre": "Uncharted 4", "precio": 1500, "consola": "Play Station 5", "imagen": "assets/img/uncharted_portada.jpg"},
-    {"id": 5, "nombre": "The Last of Us 2", "precio": 4000, "consola": "Play Station 5", "imagen": "assets/img/last_portada.jpg"},
-    {"id": 6, "nombre": "Gears 5", "precio": 2100, "consola": "Xbox Series", "imagen": "assets/img/gears_portada.jpg"},
-    {"id": 7, "nombre": "God of War", "precio": 4000, "consola": "Play Station 5", "imagen": "assets/img/gow_portada.jpg"},
-    {"id": 8, "nombre": "Unravel 2", "precio": 2100, "consola": "Xbox Series", "imagen": "assets/img/unravel_portada.jpg"},
-    {"id": 9, "nombre": "Spider-Man: Miles Morales", "precio": 2600, "consola": "Play Station 5", "imagen": "assets/img/spiderman_portada.jpg"},
-    {"id": 10, "nombre": "Ratchet & Clank: Rift Apart", "precio": 4000, "consola": "Play Station 5", "imagen": "assets/img/ratchet_portada.jpg"},
-    {"id": 11, "nombre": "State of Decay 2", "precio": 2000, "consola": "Xbox Series", "imagen": "assets/img/state_portada.jpg"},
-    {"id": 12, "nombre": "Sea of Thieves", "precio": 3000, "consola": "Xbox Series", "imagen": "assets/img/sea_portada.jpg"}
+    {"id": 1, "nombre": "Horizon Forbidden West", "precio": 2600, "consola": "Play Station 5", "imagen": "./assets/img/horizon_portada.jpg"},
+    {"id": 2, "nombre": "Halo Infinite", "precio": 3000, "consola": "Xbox Series", "imagen": "./assets/img/halo_portada.jpg"},
+    {"id": 3, "nombre": "Hogwarts Legacy", "precio": 2000, "consola": "Xbox Series", "imagen": "./assets/img/hogwarts_portada.jpg"},
+    {"id": 4, "nombre": "Uncharted 4", "precio": 1500, "consola": "Play Station 5", "imagen": "./assets/img/uncharted_portada.jpg"},
+    {"id": 5, "nombre": "The Last of Us 2", "precio": 4000, "consola": "Play Station 5", "imagen": "./assets/img/last_portada.jpg"},
+    {"id": 6, "nombre": "Gears 5", "precio": 2100, "consola": "Xbox Series", "imagen": "./assets/img/gears_portada.jpg"},
+    {"id": 7, "nombre": "God of War", "precio": 4000, "consola": "Play Station 5", "imagen": "./assets/img/gow_portada.jpg"},
+    {"id": 8, "nombre": "Unravel 2", "precio": 2100, "consola": "Xbox Series", "imagen": "./assets/img/unravel_portada.jpg"},
+    {"id": 9, "nombre": "Spider-Man: Miles Morales", "precio": 2600, "consola": "Play Station 5", "imagen": "./assets/img/spiderman_portada.jpg"},
+    {"id": 10, "nombre": "Ratchet & Clank: Rift Apart", "precio": 4000, "consola": "Play Station 5", "imagen": "./assets/img/ratchet_portada.jpg"},
+    {"id": 11, "nombre": "State of Decay 2", "precio": 2000, "consola": "Xbox Series", "imagen": "./assets/img/state_portada.jpg"},
+    {"id": 12, "nombre": "Sea of Thieves", "precio": 3000, "consola": "Xbox Series", "imagen": "./assets/img/sea_portada.jpg"}
 ]
