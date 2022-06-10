@@ -1,3 +1,5 @@
+let botonModal;
+
 // Funcion para cargar productos al carrito
 
 const agregarCarrito = (id) => {
@@ -6,25 +8,16 @@ const agregarCarrito = (id) => {
     
     busqueda === -1 && carrito.push(seleccion);
     
+    botonModal = document.querySelector(`.game${id}`);
+    botonModal.innerHTML = `<button type="button" class="btn btn-light" disabled>EN CARRITO</button>`;
+
     agregadoAlCarrito(seleccion.nombre);
     calculoTotal();
-    enCarrito(id);
     guardarEnLocal("carrito", JSON.stringify(carrito));
     cargarProductos(carrito, tabla, true);
 }
 
 cargarProductos(carrito, tabla, true);
-
-// Función para cambiar estilo de boton cuando agregas al carrito
-
-let botonModal = "";
-
-const enCarrito = (id) => {
-    juegos.forEach(() => {
-        botonModal = document.querySelector(`.game${id}`);
-        botonModal.innerHTML = `<button type="button" class="btn btn-light" disabled>EN CARRITO</button>`;
-    })
-}
 
 // Función que realiza una alerta al cargar un producto al carrito
 
@@ -59,6 +52,41 @@ const calculoTotal = () => {
 }
 
 calculoTotal();
+
+// Funcion para quitar un elemento del carrito
+
+const quitarCarrito = (id) => {
+    const seleccion = juegos.find(item => item.id === id);
+    const busqueda = carrito.findIndex(el => el.id === id);
+  
+    busqueda !== -1 && carrito.splice(busqueda, 1);
+
+    Swal.fire({
+        position: 'bottom',
+        width: '32rem',
+        title: `${seleccion.nombre} fue quitado correctamente del carrito`,
+        showConfirmButton: false,
+        timer: 1500,
+        showClass: {
+            popup: 'animate__animated animate__fadeInUp'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutDown'
+          },
+        customClass: {
+            title: 'm-0',
+            title: 'fs-6',
+        }
+    });
+
+    botonModal = document.querySelector(`.game${id}`);
+    botonModal.innerHTML = `<button onclick=agregarCarrito(${id}) type="button" class="btn btn-light">AGREGAR AL CARRITO</button>`;
+
+    guardarEnLocal("carrito", JSON.stringify(carrito));
+    cargarProductos(carrito, tabla, true);
+    calculoTotal();
+}
+
 
 // Funcion para vaciar carrito desde el modal
 
@@ -166,3 +194,32 @@ finalizar.onclick = () => {
     })
   }
 }
+
+// Funcion para comprobar el contenido del carrito
+
+const comprobarCarrito = () => {
+
+  if (carrito.length > 0) {
+    Swal.fire({
+      title: 'Comprobando contenido del carrito',
+      icon: 'info',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showCancelButton: false,
+      showConfirmButton: false,
+      timer: 2000,
+      customClass:{
+          title: 'text-dark',
+          text: 'text-dark'
+      }
+    })
+    setTimeout(() => {
+      for (const juego of carrito) {
+        botonModal = document.querySelector(`.game${juego.id}`);
+        botonModal != null && (botonModal.innerHTML = `<button type="button" class="btn btn-light" disabled>EN CARRITO</button>`);
+      }
+    }, 2000);
+  }
+}
+
+comprobarCarrito();

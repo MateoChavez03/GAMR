@@ -1,7 +1,7 @@
 let offcanvasContacto = document.querySelector(".offcanvasIzquierdo");
 
 const establecerContacto = () => {
-    const {nombre, mail, telefono, logoFacebook, logoTwitter, logoInstagram} = infoContacto
+    const {nombre, mail, telefono} = infoContacto
     offcanvasContacto.innerHTML = `
     <div>
         <div class="text-light">
@@ -14,13 +14,6 @@ const establecerContacto = () => {
         <div class="text-light py-4">
             <h5> Teléfono de contacto: </h5>
             <h5> ${telefono} </h5>
-        </div>
-    </div>
-    <div>    
-        <div class="py-4 align-bottom">
-            <img class="px-2" src="${logoTwitter}" alt="">
-            <img class="px-2" src="${logoFacebook}" alt="">
-            <img class="px-2" src="${logoInstagram}" alt="">   
         </div>
     </div>
     `

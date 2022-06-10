@@ -1,5 +1,3 @@
-// Algoritmo que añade productos al main y al modal
-
 const productos = document.querySelector("#main");
 const tabla = document.querySelector("#tablaCarrito");
 
@@ -36,7 +34,7 @@ const agregarTabla = (item) => {
             <td>$${item.precio}</td>
             <td>${item.consola}</td>
             <td>
-                <button type="button" class="btn btn-dark btn-sm" disabled>QUITAR</button>
+                <button onclick=quitarCarrito(${item.id}) type="button" class="btn btn-dark btn-sm enCarrito${item.id}">QUITAR</button>
             </td>
         </tr>
         `
@@ -45,7 +43,7 @@ const agregarTabla = (item) => {
 
 // Función de carga de productos, tanto al main como al modal
 
-const cargarProductos = async (datos, nodo, esTabla) => {
+const cargarProductos = (datos, nodo, esTabla) => {
     let acumulador = "";
     datos.forEach((el) => {
         acumulador += esTabla ? agregarTabla(el) : agregarCard(el);
@@ -57,4 +55,35 @@ const cargarProductos = async (datos, nodo, esTabla) => {
 
 const guardarEnLocal = (clave, valor) => {
     localStorage.setItem(clave, valor);
+}
+
+// Función para mostrar juegos de Play Station 5
+
+const filtroPorConsola = (consola) => {
+    let juegosFiltrados = juegos.filter(juego => juego.consola === consola);
+    cargarProductos(juegosFiltrados, main, false);
+    comprobarCarrito();
+}
+
+
+// Acción para realizar filtro de juegos Play Station
+
+let ps5 = document.querySelector(".ps5");
+ps5.onclick = () => {
+    filtroPorConsola("Play Station 5");
+}
+
+// Acción para realizar filtro de juegos Xbox
+
+let xboxSeries = document.querySelector(".xboxSeries");
+xboxSeries.onclick = () => {
+    filtroPorConsola("Xbox Series");
+}
+
+// Acción para mostrar todos los juegos
+
+let titulo = document.querySelector(".titulo");
+titulo.onclick = () => {
+    cargarProductos(juegos, main, false);
+    comprobarCarrito();
 }
