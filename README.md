@@ -1,4 +1,4 @@
-Proyecto Final de Javascript en Coderhouse
+Proyecto Final - Coderhouse
 
 GAMR
 
